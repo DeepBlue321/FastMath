@@ -1,13 +1,14 @@
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 import React from "react";
 
 function Menu() {
   return (
     <div>
-      <nav>
-        <Link to="/mult">Multi</Link>
+   
+        <Link to="/multiply">Multi</Link>
         <Link to="/add">Adding</Link>
-      </nav>
+        <Link to="/sub">Sub</Link>
+     
     </div>
   );
 }

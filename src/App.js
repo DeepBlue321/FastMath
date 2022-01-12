@@ -7,11 +7,17 @@ import Menu from "./component/Menu";
 function App() {
   return (
     <div>
+        <BrowserRouter>
+
       <Routes>
+     
+        <Route path="/sub" element={<Expression symbol={"-"} />} />
+        <Route path="/add" element={<Expression symbol={"+"} />} />
+        <Route path="/multiply" element={<Expression symbol={"*"} />} />
         <Route path="/" element={<Menu />} />
-        <Route path="sub" element={<Expression symbol={"-"} />} />
-        <Route path="add" element={<Expression symbol={"+"} />} />
       </Routes>
+      </BrowserRouter>
+
     </div>
   );
 }
