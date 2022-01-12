@@ -6,7 +6,6 @@ import Menu from "./component/Menu";
 
 function App() {
   return (
-    <div>
         <BrowserRouter>
 
       <Routes>
@@ -18,7 +17,7 @@ function App() {
       </Routes>
       </BrowserRouter>
 
-    </div>
+   
   );
 }
 

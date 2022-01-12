@@ -1,6 +1,8 @@
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
 
+
+
 function expResult(a, b, symb) {
   if (symb === "+") {
     return a + b;
@@ -34,7 +36,7 @@ function Expression({ symbol }) {
   }
 
   return (
-    <div>
+    <div className="expr">
       <h1>
         {a} {symbol} {b}
       </h1>
