@@ -1,5 +1,6 @@
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import Score from "./Score";
 
 
 
@@ -21,6 +22,8 @@ function Expression({ symbol }) {
 
   const [input, setInput] = useState("");
 
+  const [score, setScore] = useState(0);
+
   function setRandom() {
     setA(Math.floor(Math.random() * 1000));
     setB(Math.floor(Math.random() * 1000));
@@ -30,6 +33,7 @@ function Expression({ symbol }) {
     console.log(expResult(a, b, symbol));
     setInput(val);
     if (parseInt(val) === expResult(a, b, symbol)) {
+      setScore(score +1);
       setRandom();
       setInput("");
     }
@@ -37,9 +41,10 @@ function Expression({ symbol }) {
 
   return (
     <div className="expr">
-      <h1>
+      <Score score={score} />
+      <Typography fontSize={"40px"}>
         {a} {symbol} {b}
-      </h1>
+      </Typography>
       <TextField value={input} onChange={(e) => checkAnswer(e.target.value)} />
     </div>
   );
