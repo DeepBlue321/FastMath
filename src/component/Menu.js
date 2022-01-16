@@ -44,7 +44,9 @@ function Menu() {
       name: "Násobení",
       elements: [
         { rend: "▯*▯", url: "M11" },
-        { rend: "▯▯*▯▯", url: "M22" },
+        { rend: "▯▯*▯", url: "M21" },
+        { rend: "▯▯▯*▯", url: "M31" },
+        { rend: "▯▯^2", url: "P22" },
       ],
       icon: <ClearIcon />,
       open: false,

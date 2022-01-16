@@ -2,15 +2,19 @@ import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
+function roudToThree(num) {
+  return +(Math.round(num + "e+3") + "e-3");
+}
+
 function expResult(a, b, symb) {
   if (symb === "+") {
     return a + b;
   } else if (symb === "-") {
     return a - b;
-  } else if (symb === "*") {
+  } else if (symb === "*" || symb === "P") {
     return a * b;
   } else if (symb === "/") {
-    return a / b;
+    return roudToThree(a / b);
   }
 }
 
@@ -32,28 +36,39 @@ function parseUrl(url) {
     bLength: input[2],
   };
 }
-function RandomNumber(len) {
-  return Math.floor(Math.random() * Math.pow(10, len)) + 1;
+function RandomNumber(lenA, lenB, symbol) {
+  let a = Math.floor(Math.random() * Math.pow(10, lenA)) + 1;
+  if (symbol == "P") {
+    return {
+      first: a,
+      second: a,
+    };
+  }
+  let b = Math.floor(Math.random() * Math.pow(10, lenB)) + 1;
+  return { first: Math.max(a, b), second: Math.min(a, b) };
 }
 
 function Expression() {
   const { symbols } = useParams();
   let { aLength, bLength, symbol } = parseUrl(symbols);
+  const { first, second } = RandomNumber(aLength, bLength, symbol);
 
-  const [a, setA] = useState(RandomNumber(aLength));
-  const [b, setB] = useState(RandomNumber(bLength));
+  const [a, setA] = useState(first);
+  const [b, setB] = useState(second);
 
   const [input, setInput] = useState("");
 
   function setRandom() {
-    setA(RandomNumber(aLength));
-    setB(RandomNumber(bLength));
+    const { first, second } = RandomNumber(aLength, bLength);
+    setA(first);
+    setB(second);
   }
 
   function checkAnswer(val) {
     console.log(expResult(a, b, symbol));
+    console.log(parseFloat(val));
     setInput(val);
-    if (parseInt(val) === expResult(a, b, symbol)) {
+    if (Math.abs(parseFloat(val) - expResult(a, b, symbol)) < 0.0000001) {
       setRandom();
 
       setInput("");
@@ -62,10 +77,14 @@ function Expression() {
 
   return (
     <div className="expr">
-      <h1>
-        {a}
-        {symbol} {b}
-      </h1>
+      {symbol !== "P" ? (
+        <h1>
+          {a}
+          {symbol} {b}
+        </h1>
+      ) : (
+        <h1>{a}²</h1>
+      )}
       <TextField value={input} onChange={(e) => checkAnswer(e.target.value)} />
     </div>
   );
