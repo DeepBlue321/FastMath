@@ -1,21 +1,23 @@
-import { makeStyles } from "@mui/styles";
+import { Container, Typography } from "@mui/material";
 import React from "react";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  con: {
+  container: {
     position: "absolute",
-    right: "20px",
     top: "20px",
+    right: "20px",
+    textAlign: "right",
   },
 });
 function Score({ score }) {
   const styles = useStyles();
 
   return (
-    <div className={styles.con}>
-      <h4>Skore: {score}</h4>
-      <h4>Nejvyšší skore: {8}</h4>
-    </div>
+    <Container className={styles.container}>
+      <Typography>Skore: {score}</Typography>
+      <Typography>Nejvyší skore: {0}</Typography>
+    </Container>
   );
 }
 

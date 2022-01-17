@@ -8,9 +8,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/sub" element={<Expression symbol={"-"} />} />
-        <Route path="/add" element={<Expression symbol={"+"} />} />
-        <Route path="/multiply" element={<Expression symbol={"*"} />} />
+        <Route exact path="/exp/:symbols" element={<Expression />} />
+
         <Route path="/" element={<Menu />} />
       </Routes>
     </BrowserRouter>
