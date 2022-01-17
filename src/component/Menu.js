@@ -56,6 +56,7 @@ function Menu() {
       elements: [
         { rend: "▯▯/▯", url: "d21" },
         { rend: "▯▯▯/▯", url: "d31" },
+        { rend: "√▯▯", url: "s22" },
       ],
       icon: "/",
       open: false,
