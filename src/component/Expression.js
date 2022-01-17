@@ -2,8 +2,6 @@ import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Score from "./Score";
 
-
-
 function expResult(a, b, symb) {
   if (symb === "+") {
     return a + b;
@@ -33,7 +31,7 @@ function Expression({ symbol }) {
     console.log(expResult(a, b, symbol));
     setInput(val);
     if (parseInt(val) === expResult(a, b, symbol)) {
-      setScore(score +1);
+      setScore(score + 1);
       setRandom();
       setInput("");
     }

@@ -6,18 +6,14 @@ import Menu from "./component/Menu";
 
 function App() {
   return (
-        <BrowserRouter>
-
+    <BrowserRouter>
       <Routes>
-     
         <Route path="/sub" element={<Expression symbol={"-"} />} />
         <Route path="/add" element={<Expression symbol={"+"} />} />
         <Route path="/multiply" element={<Expression symbol={"*"} />} />
         <Route path="/" element={<Menu />} />
       </Routes>
-      </BrowserRouter>
-
-   
+    </BrowserRouter>
   );
 }
 
