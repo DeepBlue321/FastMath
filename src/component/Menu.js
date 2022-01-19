@@ -84,7 +84,6 @@ function Menu() {
     <Stack direction="column" spacing={2}>
       {list.map((t) => (
         <div key={t.name}>
-          {console.log(t)}
           <ListItemButton onClick={() => handleClick(t.name)}>
             <ListItemIcon>{t.icon}</ListItemIcon>
             <ListItemText primary={t.name} />

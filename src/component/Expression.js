@@ -1,8 +1,10 @@
 import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Score from "./Score";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Special from "./Special";
+
+import Bar from "./Bar";
 
 function roudToThree(num) {
   return +(Math.round(num + "e+3") + "e-3");
@@ -53,6 +55,11 @@ function RandomNumber(lenA, lenB, symbol) {
 }
 
 function Expression() {
+  let navigate = useNavigate();
+  function stop() {
+    console.log("ddd");
+    navigate("/", { replace: true });
+  }
   const { symbols } = useParams();
   let { aLength, bLength, symbol } = parseUrl(symbols);
   const { first, second } = RandomNumber(aLength, bLength, symbol);
@@ -86,6 +93,7 @@ function Expression() {
     <div className="expr">
       <Score score={score} />
 
+      <Bar stop={stop} />
       {symbol !== "P" && symbol !== "s" ? (
         <Typography fontSize={"40px"}>
           {a} {symbol} {b}
