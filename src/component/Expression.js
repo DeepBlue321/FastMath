@@ -58,7 +58,6 @@ function Expression() {
   let navigate = useNavigate();
   function stop() {
     saveLocal(score, symbols);
-    console.log("ddd");
     navigate("/", { replace: true });
     console.log(score);
   }
@@ -104,7 +103,12 @@ function Expression() {
       ) : (
         <Special symbol={symbol} a={a} />
       )}
-      <TextField value={input} onChange={(e) => checkAnswer(e.target.value)} />
+      <TextField
+        autoComplete="false"
+        autoFocus
+        value={input}
+        onChange={(e) => checkAnswer(e.target.value)}
+      />
     </div>
   );
 }
