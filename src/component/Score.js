@@ -10,13 +10,13 @@ const useStyles = makeStyles({
     textAlign: "right",
   },
 });
-function Score({ score }) {
+function Score({ score, highScore }) {
   const styles = useStyles();
 
   return (
     <Container className={styles.container}>
       <Typography>Skore: {score}</Typography>
-      <Typography>Nejvyší skore: {0}</Typography>
+      <Typography>Nejvyší skore: {highScore}</Typography>
     </Container>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Score from "./Score";
 import { useParams, useNavigate } from "react-router-dom";
 import Special from "./Special";
-
+import { saveLocal, getLocal } from "./Local";
 import Bar from "./Bar";
 
 function roudToThree(num) {
@@ -57,8 +57,10 @@ function RandomNumber(lenA, lenB, symbol) {
 function Expression() {
   let navigate = useNavigate();
   function stop() {
+    saveLocal(score, symbols);
     console.log("ddd");
     navigate("/", { replace: true });
+    console.log(score);
   }
   const { symbols } = useParams();
   let { aLength, bLength, symbol } = parseUrl(symbols);
@@ -70,6 +72,7 @@ function Expression() {
   const [input, setInput] = useState("");
 
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(getLocal(symbols));
 
   function setRandom() {
     const { first, second } = RandomNumber(aLength, bLength);
@@ -91,7 +94,7 @@ function Expression() {
 
   return (
     <div className="expr">
-      <Score score={score} />
+      <Score score={score} highScore={highScore} />
 
       <Bar stop={stop} />
       {symbol !== "P" && symbol !== "s" ? (
