@@ -104,7 +104,7 @@ function Expression() {
         <Special symbol={symbol} a={a} />
       )}
       <TextField
-        autoComplete="false"
+        autoComplete="off"
         autoFocus
         value={input}
         onChange={(e) => checkAnswer(e.target.value)}
