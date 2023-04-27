@@ -1,7 +1,4 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
-function saveLocal(score, symbols) {
+export function setHighScore(score, symbols) {
   const highScore = parseInt(localStorage.getItem(symbols));
 
   if (!highScore) {
@@ -13,12 +10,10 @@ function saveLocal(score, symbols) {
   }
 }
 
-function getLocal(symbols) {
+export function getHighScore(symbols) {
   const value = parseInt(localStorage.getItem(symbols));
   if (value) {
     return value;
   }
   return 0;
 }
-
-export { saveLocal, getLocal };

@@ -1,6 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { getHighScore } from "../utils/localScore";
 
 const useStyles = makeStyles({
   container: {
@@ -10,13 +11,13 @@ const useStyles = makeStyles({
     textAlign: "right",
   },
 });
-function Score({ score, highScore }) {
+function Score({ score, symbols }) {
   const styles = useStyles();
 
   return (
     <Container className={styles.container}>
       <Typography>Skore: {score}</Typography>
-      <Typography>Nejvyší skore: {highScore}</Typography>
+      <Typography>Nejvyší skore: {getHighScore(symbols)}</Typography>
     </Container>
   );
 }

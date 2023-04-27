@@ -1,26 +1,27 @@
 import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import Score from "./Score";
+import Score from "../component/Score";
 import { useParams, useNavigate } from "react-router-dom";
-import Special from "./Special";
-import { saveLocal, getLocal } from "./Local";
-import Bar from "./Bar";
+import Special from "../component/Special";
+import { setHighScore } from "../utils/localScore";
+import Bar from "../component/Bar";
+import { getRandomNumbers } from "../utils/getRandomNumbers";
 
-function roudToThree(num) {
+function roundToThree(num) {
   return +(Math.round(num + "e+3") + "e-3");
 }
 
-function expResult(a, b, symb) {
-  if (symb === "+") {
+function calculateResult(a, b, symbol) {
+  if (symbol === "+") {
     return a + b;
-  } else if (symb === "-") {
+  } else if (symbol === "-") {
     return a - b;
-  } else if (symb === "*" || symb === "P") {
+  } else if (symbol === "*" || symbol === "P") {
     return a * b;
-  } else if (symb === "/") {
-    return roudToThree(a / b);
-  } else if (symb === "s") {
-    return roudToThree(Math.sqrt(a));
+  } else if (symbol === "/") {
+    return roundToThree(a / b);
+  } else if (symbol === "s") {
+    return roundToThree(Math.sqrt(a));
   }
 }
 
@@ -42,28 +43,12 @@ function parseUrl(url) {
     bLength: input[2],
   };
 }
-function RandomNumber(lenA, lenB, symbol) {
-  let a = Math.floor(Math.random() * Math.pow(10, lenA)) + 1;
-  if (symbol === "P" || symbol === "s") {
-    return {
-      first: a,
-      second: a,
-    };
-  }
-  let b = Math.floor(Math.random() * Math.pow(10, lenB)) + 1;
-  return { first: Math.max(a, b), second: Math.min(a, b) };
-}
 
 function Expression() {
   let navigate = useNavigate();
-  function stop() {
-    saveLocal(score, symbols);
-    navigate("/", { replace: true });
-    console.log(score);
-  }
   const { symbols } = useParams();
   let { aLength, bLength, symbol } = parseUrl(symbols);
-  const { first, second } = RandomNumber(aLength, bLength, symbol);
+  const { first, second } = getRandomNumbers(aLength, bLength, symbol);
 
   const [a, setA] = useState(first);
   const [b, setB] = useState(second);
@@ -71,20 +56,21 @@ function Expression() {
   const [input, setInput] = useState("");
 
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(getLocal(symbols));
 
-  function setRandom() {
-    const { first, second } = RandomNumber(aLength, bLength);
+  function stop() {
+    setHighScore(score, symbols);
+    navigate("/", { replace: true });
+  }
+  function resetNumbers() {
+    const { first, second } = getRandomNumbers(aLength, bLength);
     setA(first);
     setB(second);
   }
 
   function checkAnswer(val) {
-    console.log(expResult(a, b, symbol));
-    console.log(parseFloat(val));
     setInput(val);
-    if (Math.abs(parseFloat(val) - expResult(a, b, symbol)) < 0.0000001) {
-      setRandom();
+    if (Math.abs(parseFloat(val) - calculateResult(a, b, symbol)) < 0.0000001) {
+      resetNumbers();
       setScore(score + 1);
 
       setInput("");
@@ -92,8 +78,8 @@ function Expression() {
   }
 
   return (
-    <div className="expr">
-      <Score score={score} highScore={highScore} />
+    <div className="expression">
+      <Score score={score} symbols={symbols} />
 
       <Bar stop={stop} />
       {symbol !== "P" && symbol !== "s" ? (

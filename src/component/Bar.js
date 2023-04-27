@@ -23,11 +23,11 @@ function Bar({ stop }) {
     stop();
   }
 
-  const sty = useStyles();
+  const style = useStyles();
 
   return (
     <CircularProgressbar
-      className={sty.progressBar}
+      className={style.progressBar}
       styles={buildStyles({
         pathColor: "#3f50b5",
       })}

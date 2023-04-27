@@ -1,8 +1,7 @@
 import "./App.css";
-import Expression from "./component/Expression";
-import { render } from "react-dom";
+import Expression from "./pages/ExpressionPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Menu from "./component/Menu";
+import Menu from "./pages/MenuPage";
 
 function App() {
   return (
